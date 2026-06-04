@@ -126,11 +126,3 @@ The big takeaway: AI will sometimes be confidently wrong. That is fine. Your job
 - Spot hallucinations in AI-generated code
 - Fix AI mistakes through iterative follow-up prompts instead of starting from scratch
 
----
-
-## Come Prepared With
-
-- Your dev environment from Session 1 (everything installed and working)
-- Access to at least one chat model (Claude, ChatGPT, or Gemini)
-- A code editor with Copilot or similar extension
-- An open mind — some of what you see today will feel like magic, and some will feel frustrating. Both reactions are normal.
