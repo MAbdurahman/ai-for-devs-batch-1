@@ -192,3 +192,61 @@ ROUTE 3: GET /me
     3. Return 200 { userId: user.id, email: user.email, name: user.name }
   NEVER return passwordHash in any response
 
+
+
+
+prompt-5
+Generate server.js — the Express app entry point.
+
+IMPORTS (all files already exist — use these exact paths):
+  express, cors (npm packages)
+  authRoutes from './routes/auth'
+
+SETUP:
+  1. Create Express app
+  2. Enable CORS for origin: 'http://localhost:5500' (VS Code Live Server)
+     methods: GET, POST
+     allowedHeaders: Content-Type, Authorization
+  3. Enable express.json() body parser
+  4. Serve static files from ./public folder (express.static)
+  5. Mount authRoutes at '/api'
+  6. Add a catch-all 404 handler:
+     res.status(404).json({ error: 'Route not found' })
+  7. Start server on PORT = process.env.PORT || 3000
+     Log: 'Server running on http://localhost:3000'  (only this one log is allowed)
+
+RULES:
+  - No other console.log
+  - No TODO comments
+  - CommonJS (require)
+
+Output: only server.js. No explanation.
+
+
+
+
+
+6th prompt
+Generate public/login.html — a standalone HTML file.
+Same styling rules as register.html (centred card, #2E86C1 primary).
+
+FORM FIELDS:
+  - Email (type=email, id='email', required)
+  - Password (type=password, id='password', required)
+  - Submit button: 'Login'
+  - Error div: id='errorMsg', hidden by default, red text (#E74C3C)
+  - Link at bottom: 'No account? Register here' → register.html
+
+JAVASCRIPT (in <script> block):
+  On form submit:
+  1. Prevent default
+  2. POST to http://localhost:3000/api/login
+     body: { email, password }
+     headers: { 'Content-Type': 'application/json' }
+  3. On 200: save token → localStorage.setItem('auth_token', data.token)
+             then redirect to dashboard.html
+  4. On error: show response error message in errorMsg div
+  5. Wrap in try/catch → show 'Login failed. Try again.' on network error
+
+Output: only login.html, complete and working. No explanation.
+
