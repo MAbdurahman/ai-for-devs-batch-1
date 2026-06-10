@@ -23,6 +23,10 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/", (req, res) => {
+  res.redirect("/register.html");
+});
+
 app.use("/api", authRoutes);
 
 app.use((req, res) => {
@@ -35,6 +39,9 @@ app.use((err, req, res, next) => {
     .json({ error: err.message || "Internal server error" });
 });
 
-app.listen(PORT, () => {
+const http = require("http");
+const server = http.createServer(app);
+
+server.listen(PORT, () => {
   console.log("Server running on http://localhost:3000");
 });
