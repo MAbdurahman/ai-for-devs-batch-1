@@ -250,3 +250,51 @@ JAVASCRIPT (in <script> block):
 
 Output: only login.html, complete and working. No explanation.
 
+
+dashboard prompt
+Generate public/dashboard.html — a standalone HTML file.
+No external CSS files. No JavaScript frameworks.
+All styles in <style>. All JS in <script>.
+
+ON PAGE LOAD (window.onload or DOMContentLoaded):
+  1. Read localStorage.getItem('auth_token')
+  2. If null/undefined → immediately redirect to login.html
+  3. Call GET http://localhost:3000/api/me
+     Header: Authorization: Bearer <token>
+  4. If response.status === 401 →
+        localStorage.removeItem('auth_token')
+        redirect to login.html
+  5. On success → populate UI with user data
+
+UI ELEMENTS:
+  - Heading: 'Welcome, <user.name>!' (id='welcomeMsg')
+  - Paragraph: 'Email: <user.email>' (id='userEmail')
+  - Logout button (id='logoutBtn'):
+      onClick: localStorage.removeItem('auth_token'), redirect to login.html
+  - A loading state: show 'Loading...' text while fetching
+
+STYLING:
+  - Same card style as login/register pages
+  - Logout button: red (#E74C3C), white text, full width
+
+Output: only dashboard.html, complete and working. No explanation.
+
+
+review prompt
+Review ALL the files we have generated across these 7 steps:
+  utils/jwt.js, utils/password.js, middleware/auth.js,
+  routes/auth.js, server.js,
+  public/register.html, public/login.html, public/dashboard.html
+
+Check for these integration issues:
+1. Does the CORS origin in server.js match the URL used in fetch() calls in HTML?
+2. Are all import paths correct (relative paths between files)?
+3. Does the Authorization header format in dashboard.html match
+   what the auth middleware expects?
+4. Is the localStorage key 'auth_token' consistent across login and dashboard?
+5. Do the API error message strings in routes/auth.js match
+   what the HTML pages display to users?
+
+List any mismatches found. Fix only what is broken.
+
+
